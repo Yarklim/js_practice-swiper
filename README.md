@@ -1,2 +1,5 @@
-# js_practice-swiper
-Custom gallery swiper
+# Custom Drag & Touch Gallery Swiper  
+## Tech Stack:  
+- JavaScript;  
+- CSS;  
+- HTML;
