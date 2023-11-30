@@ -13,11 +13,11 @@ img {
 	display: block;
 
 	width: 100%;
-	height: auto;
 }
 
 .swiper__container {
-	max-width: 600px;
+	max-width: 903px;
+	height: 540px;
 
 	margin: 0 auto;
 	padding: 20px;
@@ -35,5 +35,7 @@ img {
 
 .swiper__slide-img {
 	pointer-events: none;
+
+	object-fit: cover;
 }
 
