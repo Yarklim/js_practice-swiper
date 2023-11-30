@@ -20,3 +20,24 @@ img {
 	width: 100%;
 }
 
+.slide {
+	/* width: 600px; */
+	height: 300px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.slide-1 {
+	background-color: aquamarine;
+}
+.slide-2 {
+	background-color: greenyellow;
+}
+.slide-3 {
+	background-color: blue;
+}
+.slide-4 {
+	background-color: yellow;
+}
