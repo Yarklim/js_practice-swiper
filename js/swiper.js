@@ -1,4 +1,5 @@
 const SwiperClassName = 'swiper';
+const SwiperDraggableClassName = 'swiper-draggable';
 const SwiperLineClassName = 'swiper__line';
 const SwiperSlideClassName = 'swiper__slide';
 
@@ -25,7 +26,6 @@ class Swiper {
     this.manageHTML();
     this.setParameters();
     this.setEvents();
-    this.destroyEvents();
   }
 
   manageHTML() {
@@ -51,9 +51,11 @@ class Swiper {
     this.maximumX = -(this.size - 1) * (this.width + this.settings.margin);
     this.x = -this.currentSlide * (this.width + this.settings.margin);
 
+    this.resetStyleTransition();
     this.lineNode.style.width = `${
       this.size * (this.width + this.settings.margin)
     }px`;
+    this.setStylePosition();
     Array.from(this.slideNodes).forEach((slideNode) => {
       slideNode.style.width = `${this.width}px`;
       slideNode.style.marginRight = `${this.settings.margin}px`;
@@ -61,14 +63,18 @@ class Swiper {
   }
 
   setEvents() {
-    this.debounceResizeSwiper = debounce(this.resizeSwiper);
-    window.addEventListener('resize', this.debounceResizeSwiper);
+    this.debouncedResizeSwiper = debounce(this.resizeSwiper);
+    window.addEventListener('resize', this.debouncedResizeSwiper);
     this.lineNode.addEventListener('pointerdown', this.startDrag);
     window.addEventListener('pointerup', this.stopDrag);
+    window.addEventListener('pointercancel', this.stopDrag);
   }
 
   destroyEvents() {
-    window.removeEventListener('resize', this.debounceResizeSwiper);
+    window.removeEventListener('resize', this.debouncedResizeSwiper);
+    this.lineNode.removeEventListener('pointerdown', this.startDrag);
+    window.removeEventListener('pointerup', this.stopDrag);
+    window.removeEventListener('pointercancel', this.stopDrag);
   }
 
   resizeSwiper() {
@@ -80,11 +86,17 @@ class Swiper {
     this.clickX = e.pageX;
     this.startX = this.x;
     this.resetStyleTransition();
+
+    this.containerNode.classList.add(SwiperDraggableClassName);
+
     window.addEventListener('pointermove', this.dragging);
   }
 
   stopDrag() {
     window.removeEventListener('pointermove', this.dragging);
+
+    this.containerNode.classList.remove(SwiperDraggableClassName);
+
     this.x = -this.currentSlide * (this.width + this.settings.margin);
     this.setStylePosition();
     this.setStyleTransition();

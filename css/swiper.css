@@ -1,7 +1,14 @@
 .swiper {
 	width: 100%;
 
+	user-select: none;
+	-webkit-user-select: none;
+
 	overflow: hidden;
+}
+
+.swiper-draggable {
+	cursor: grabbing;
 }
 
 .swiper__line {
@@ -11,6 +18,8 @@
 .swiper__slide {
 	min-height: 1px;
 	float: left;
+
+	transform: translateZ(0);
 }
 
 .slide {
