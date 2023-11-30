@@ -1,5 +1,5 @@
 .swiper {
-	width: 100%;
+	position: relative;
 
 	user-select: none;
 	-webkit-user-select: none;
@@ -16,9 +16,91 @@
 }
 
 .swiper__slide {
+	width: 100%;
 	min-height: 1px;
 	float: left;
+
+	overflow: hidden;
 
 	transform: translateZ(0);
 }
 
+.swiper__dots {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.swiper__dot {
+	width: 10px;
+	height: 10px;
+
+	padding: 0;
+
+	border-radius: 50%;
+	border: none;
+	background: #ccc;
+	outline: none;
+
+	cursor: pointer;
+
+	transition: all 0.3s ease;
+}
+
+.swiper__dot:focus-visible,
+.swiper__dot:hover,
+.swiper__dot-active {
+	background: #888;
+}
+
+.swiper__nav {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+
+	padding: 20px 0 ;
+}
+
+.swiper__nav button {
+	cursor: pointer;
+}
+
+.swiper__nav-prev,
+.swiper__nav-next {
+	width: 32px;
+	height: 32px;
+
+	position: absolute;
+	top: 50%;
+
+	border: none;
+	outline: none;
+	
+	transition: all 0.3s ease;
+}
+
+.swiper__nav-prev {
+	left: 0;
+
+	transform: rotate(180deg);
+	background: url('../icons/arrow_nav.svg') no-repeat center;
+	background-size: contain;
+}
+
+.swiper__nav-next {
+	right: 0;
+
+	background: url('../icons/arrow_nav.svg') no-repeat center;
+	background-size: contain;
+}
+
+.swiper__nav-disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+@media screen and (max-width: 700px) {
+	.swiper__nav {
+		display: none;
+	}
+}
